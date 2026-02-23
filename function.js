@@ -17,60 +17,147 @@ function hideShow(id) {
   }
 }
 
+function updateSummary(sectionId, messageId, countId) {
+  const totalJobs = updateSection("allSection", null, "totalCount");
+  const currentJobs = updateSection(sectionId, messageId, countId);
+
+  document.getElementById("total-jobs").innerText =
+    `${currentJobs} out of ${totalJobs} jobs`;
+}
+
+function summary() {
+  const totalJobs = updateSection("allSection", null, "totalCount");
+  document.getElementById("total-jobs").innerText = `${totalJobs} jobs`;
+}
+
+function updateSection(sectionId, messageId, displayId) {
+  const section = document.getElementById(sectionId);
+  const message = document.getElementById(messageId);
+
+  const cardCount = section.querySelectorAll(".cards").length;
+
+  if (message) {
+    if (cardCount === 0) {
+      message.style.display = "block";
+    } else {
+      message.style.display = "none";
+    }
+  }
+
+  if (displayId) {
+    document.getElementById(displayId).innerText = cardCount;
+  }
+
+  return cardCount;
+}
+
 all.addEventListener("click", function (e) {
   if (e.target.classList.contains("interview-btn")) {
+    const card = e.target.closest(".cards");
+    const clonedCard = card.cloneNode(true);
     e.target.disabled = true;
     e.target.style.opacity = "0.5";
-    const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Interview";
-    const clonedCard = card.cloneNode(true);
+    card.myClone = clonedCard;
     clonedCard.originalCard = card;
     clonedCard.querySelector(".appliedornot").innerText = "Interview";
     interview.appendChild(clonedCard);
+    updateSection("interviewSection", "interviewMessage", "interviewCount");
     const rejectedButton = card.querySelector(".rejected-btn");
     rejectedButton.disabled = true;
     rejectedButton.style.opacity = "0.5";
   }
 
   if (e.target.classList.contains("rejected-btn")) {
+    const card = e.target.closest(".cards");
+    const clonedCard = card.cloneNode(true);
     e.target.disabled = true;
     e.target.style.opacity = "0.5";
-
-    const card = e.target.closest(".cards");
-
     card.querySelector(".appliedornot").innerText = "Rejected";
-    const clonedCard = card.cloneNode(true);
+    card.myClone = clonedCard;
     clonedCard.originalCard = card;
-
     clonedCard.querySelector(".appliedornot").innerText = "Rejected";
     rejected.appendChild(clonedCard);
-    const rejectedButton = card.querySelector(".interview-btn");
-    rejectedButton.disabled = true;
-    rejectedButton.style.opacity = "0.5";
-    const rejectedButton2 = clonedCard.querySelector(".interview-btn");
-    rejectedButton2.disabled = true;
-    rejectedButton2.style.opacity = "0.5";
+    updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
+    const interviewButton = card.querySelector(".interview-btn");
+    interviewButton.disabled = true;
+    interviewButton.style.opacity = "0.5";
+  }
+  if (e.target.closest(".delete-btn")) {
+    const card = e.target.closest(".cards");
+    if (card.originalCard) {
+      card.originalCard.remove();
+    }
+
+    if (card.myClone) {
+      card.myClone.remove();
+    }
+
+    card.remove();
+
+    updateSection("allSection", null, "totalCount");
+    updateSection("interviewSection", "interviewMessage", "interviewCount");
+    updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
+    summary();
   }
 });
 
 interview.addEventListener("click", function (e) {
   if (e.target.classList.contains("rejected-btn")) {
-    e.target.disabled = true;
-    e.target.style.opacity = "0.5";
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Rejected";
     card.originalCard.querySelector(".appliedornot").innerText = "Rejected";
     rejected.appendChild(card);
+    updateSection("interviewSection", "interviewMessage", "interviewCount");
+    updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
+  }
+  if (e.target.closest(".delete-btn")) {
+    const card = e.target.closest(".cards");
+
+    if (card.originalCard) {
+      card.originalCard.remove();
+    }
+
+    if (card.myClone) {
+      card.myClone.remove();
+    }
+
+    card.remove();
+
+    updateSection("allSection", null, "totalCount");
+    updateSection("interviewSection", "interviewMessage", "interviewCount");
+    updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
+    updateSummary("interviewSection", "interviewMessage", "interviewCount");
   }
 });
 
 rejected.addEventListener("click", function (e) {
   if (e.target.classList.contains("interview-btn")) {
-    e.target.disabled = true;
-    e.target.style.opacity = "0.5";
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Interview";
     card.originalCard.querySelector(".appliedornot").innerText = "Interview";
     interview.appendChild(card);
+    updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
+    updateSection("interviewSection", "interviewMessage", "interviewCount");
   }
+  if (e.target.closest(".delete-btn")) {
+    const card = e.target.closest(".cards");
+
+    if (card.originalCard) {
+      card.originalCard.remove();
+    }
+
+    if (card.myClone) {
+      card.myClone.remove();
+    }
+
+    card.remove();
+
+    updateSection("allSection", null, "totalCount");
+    updateSection("interviewSection", "interviewMessage", "interviewCount");
+    updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
+  }
+  updateSummary("rejectedSection", "rejectedMessage", "rejectedCount");
 });
+
+summary();
