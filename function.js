@@ -19,26 +19,44 @@ function hideShow(id) {
 
 all.addEventListener("click", function (e) {
   if (e.target.classList.contains("interview-btn")) {
+    e.target.disabled = true;
+    e.target.style.opacity = "0.5";
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Interview";
     const clonedCard = card.cloneNode(true);
     clonedCard.originalCard = card;
     clonedCard.querySelector(".appliedornot").innerText = "Interview";
     interview.appendChild(clonedCard);
+    const rejectedButton = card.querySelector(".rejected-btn");
+    rejectedButton.disabled = true;
+    rejectedButton.style.opacity = "0.5";
   }
 
   if (e.target.classList.contains("rejected-btn")) {
+    e.target.disabled = true;
+    e.target.style.opacity = "0.5";
+
     const card = e.target.closest(".cards");
+
     card.querySelector(".appliedornot").innerText = "Rejected";
     const clonedCard = card.cloneNode(true);
     clonedCard.originalCard = card;
+
     clonedCard.querySelector(".appliedornot").innerText = "Rejected";
     rejected.appendChild(clonedCard);
+    const rejectedButton = card.querySelector(".interview-btn");
+    rejectedButton.disabled = true;
+    rejectedButton.style.opacity = "0.5";
+    const rejectedButton2 = clonedCard.querySelector(".interview-btn");
+    rejectedButton2.disabled = true;
+    rejectedButton2.style.opacity = "0.5";
   }
 });
 
 interview.addEventListener("click", function (e) {
   if (e.target.classList.contains("rejected-btn")) {
+    e.target.disabled = true;
+    e.target.style.opacity = "0.5";
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Rejected";
     card.originalCard.querySelector(".appliedornot").innerText = "Rejected";
@@ -48,6 +66,8 @@ interview.addEventListener("click", function (e) {
 
 rejected.addEventListener("click", function (e) {
   if (e.target.classList.contains("interview-btn")) {
+    e.target.disabled = true;
+    e.target.style.opacity = "0.5";
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Interview";
     card.originalCard.querySelector(".appliedornot").innerText = "Interview";
