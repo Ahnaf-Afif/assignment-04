@@ -22,6 +22,7 @@ all.addEventListener("click", function (e) {
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Interview";
     const clonedCard = card.cloneNode(true);
+    clonedCard.originalCard = card;
     clonedCard.querySelector(".appliedornot").innerText = "Interview";
     interview.appendChild(clonedCard);
   }
@@ -30,6 +31,7 @@ all.addEventListener("click", function (e) {
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Rejected";
     const clonedCard = card.cloneNode(true);
+    clonedCard.originalCard = card;
     clonedCard.querySelector(".appliedornot").innerText = "Rejected";
     rejected.appendChild(clonedCard);
   }
@@ -38,21 +40,17 @@ all.addEventListener("click", function (e) {
 interview.addEventListener("click", function (e) {
   if (e.target.classList.contains("rejected-btn")) {
     const card = e.target.closest(".cards");
-    card.querySelector(".appliedornot").innerText = "Interview";
-    const clonedCard = card.cloneNode(true);
-    const appliedOrNot1 = card.querySelector(".appliedornot");
-    const appliedOrNot2 = clonedCard.querySelector(".appliedornot");
-    appliedOrNot1.innerText = "Rejected";
-    appliedOrNot2.innerText = "Rejected";
-    rejected.appendChild(clonedCard);
-    interview.removeChild(card);
+    card.querySelector(".appliedornot").innerText = "Rejected";
+    card.originalCard.querySelector(".appliedornot").innerText = "Rejected";
+    rejected.appendChild(card);
   }
 });
 
 rejected.addEventListener("click", function (e) {
   if (e.target.classList.contains("interview-btn")) {
     const card = e.target.closest(".cards");
-    appliedOrNot.innerText = "Interview";
+    card.querySelector(".appliedornot").innerText = "Interview";
+    card.originalCard.querySelector(".appliedornot").innerText = "Interview";
     interview.appendChild(card);
   }
 });
