@@ -58,9 +58,15 @@ all.addEventListener("click", function (e) {
     e.target.disabled = true;
     e.target.style.opacity = "0.5";
     card.querySelector(".appliedornot").innerText = "Interview";
+    card.querySelector(".appliedornot").classList.remove("bg-slate-200");
+    card.querySelector(".appliedornot").classList.remove("bg-red-500");
+    card.querySelector(".appliedornot").classList.add("bg-green-400");
     card.myClone = clonedCard;
     clonedCard.originalCard = card;
     clonedCard.querySelector(".appliedornot").innerText = "Interview";
+    clonedCard.querySelector(".appliedornot").classList.remove("bg-slate-200");
+    clonedCard.querySelector(".appliedornot").classList.remove("bg-red-500");
+    clonedCard.querySelector(".appliedornot").classList.add("bg-green-400");
     interview.appendChild(clonedCard);
     updateSection("interviewSection", "interviewMessage", "interviewCount");
     const rejectedButton = card.querySelector(".rejected-btn");
@@ -74,9 +80,15 @@ all.addEventListener("click", function (e) {
     e.target.disabled = true;
     e.target.style.opacity = "0.5";
     card.querySelector(".appliedornot").innerText = "Rejected";
+    card.querySelector(".appliedornot").classList.remove("bg-slate-200");
+    card.querySelector(".appliedornot").classList.remove("bg-green-400");
+    card.querySelector(".appliedornot").classList.add("bg-red-500");
     card.myClone = clonedCard;
     clonedCard.originalCard = card;
     clonedCard.querySelector(".appliedornot").innerText = "Rejected";
+    clonedCard.querySelector(".appliedornot").classList.remove("bg-slate-200");
+    clonedCard.querySelector(".appliedornot").classList.remove("bg-green-400");
+    clonedCard.querySelector(".appliedornot").classList.add("bg-red-500");
     rejected.appendChild(clonedCard);
     updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
     const interviewButton = card.querySelector(".interview-btn");
@@ -106,7 +118,19 @@ interview.addEventListener("click", function (e) {
   if (e.target.classList.contains("rejected-btn")) {
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Rejected";
+    card.querySelector(".appliedornot").classList.remove("bg-stale-200");
+    card.querySelector(".appliedornot").classList.remove("bg-green-400");
+    card.querySelector(".appliedornot").classList.add("bg-red-500");
     card.originalCard.querySelector(".appliedornot").innerText = "Rejected";
+    card.originalCard
+      .querySelector(".appliedornot")
+      .classList.remove("bg-stale-200");
+    card.originalCard
+      .querySelector(".appliedornot")
+      .classList.remove("bg-green-400");
+    card.originalCard
+      .querySelector(".appliedornot")
+      .classList.add("bg-red-500");
     rejected.appendChild(card);
     updateSection("interviewSection", "interviewMessage", "interviewCount");
     updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
@@ -135,7 +159,19 @@ rejected.addEventListener("click", function (e) {
   if (e.target.classList.contains("interview-btn")) {
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Interview";
+    card.querySelector(".appliedornot").classList.remove("bg-slate-200");
+    card.querySelector(".appliedornot").classList.remove("bg-red-500");
+    card.querySelector(".appliedornot").classList.add("bg-green-400");
     card.originalCard.querySelector(".appliedornot").innerText = "Interview";
+    card.originalCard
+      .querySelector(".appliedornot")
+      .classList.remove("bg-slate-200");
+    card.originalCard
+      .querySelector(".appliedornot")
+      .classList.remove("bg-red-500");
+    card.originalCard
+      .querySelector(".appliedornot")
+      .classList.add("bg-green-400");
     interview.appendChild(card);
     updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
     updateSection("interviewSection", "interviewMessage", "interviewCount");
