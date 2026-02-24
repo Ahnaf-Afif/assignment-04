@@ -118,7 +118,7 @@ interview.addEventListener("click", function (e) {
   if (e.target.classList.contains("rejected-btn")) {
     const card = e.target.closest(".cards");
     card.querySelector(".appliedornot").innerText = "Rejected";
-    card.querySelector(".appliedornot").classList.remove("bg-stale-200");
+    card.querySelector(".appliedornot").classList.remove("bg-slate-200");
     card.querySelector(".appliedornot").classList.remove("bg-green-400");
     card.querySelector(".appliedornot").classList.add("bg-red-500");
     card.originalCard.querySelector(".appliedornot").innerText = "Rejected";
