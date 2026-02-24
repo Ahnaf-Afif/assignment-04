@@ -17,9 +17,9 @@ function hideShow(id) {
   }
 }
 
-function updateSummary(sectionId, messageId, countId) {
+function totalJobs(secId, msgId, countId) {
   const totalJobs = updateSection("allSection", null, "totalCount");
-  const currentJobs = updateSection(sectionId, messageId, countId);
+  const currentJobs = updateSection(secId, msgId, countId);
 
   document.getElementById("total-jobs").innerText =
     `${currentJobs} out of ${totalJobs} jobs`;
@@ -30,9 +30,9 @@ function summary() {
   document.getElementById("total-jobs").innerText = `${totalJobs} jobs`;
 }
 
-function updateSection(sectionId, messageId, displayId) {
-  const section = document.getElementById(sectionId);
-  const message = document.getElementById(messageId);
+function updateSection(secId, msgId, dispId) {
+  const section = document.getElementById(secId);
+  const message = document.getElementById(msgId);
 
   const cardCount = section.querySelectorAll(".cards").length;
 
@@ -44,8 +44,8 @@ function updateSection(sectionId, messageId, displayId) {
     }
   }
 
-  if (displayId) {
-    document.getElementById(displayId).innerText = cardCount;
+  if (dispId) {
+    document.getElementById(dispId).innerText = cardCount;
   }
 
   return cardCount;
@@ -127,7 +127,7 @@ interview.addEventListener("click", function (e) {
     updateSection("allSection", null, "totalCount");
     updateSection("interviewSection", "interviewMessage", "interviewCount");
     updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
-    updateSummary("interviewSection", "interviewMessage", "interviewCount");
+    totalJobs("interviewSection", "interviewMessage", "interviewCount");
   }
 });
 
@@ -157,7 +157,7 @@ rejected.addEventListener("click", function (e) {
     updateSection("interviewSection", "interviewMessage", "interviewCount");
     updateSection("rejectedSection", "rejectedMessage", "rejectedCount");
   }
-  updateSummary("rejectedSection", "rejectedMessage", "rejectedCount");
+  totalJobs("rejectedSection", "rejectedMessage", "rejectedCount");
 });
 
 summary();
