@@ -8,12 +8,31 @@ function hideShow(id) {
   interview.classList.add("hidden");
   rejected.classList.add("hidden");
 
+  document
+    .getElementById("alls-btn")
+    .classList.remove("bg-blue-700", "text-white");
+  document
+    .getElementById("inter-btn")
+    .classList.remove("bg-blue-700", "text-white");
+  document
+    .getElementById("rej-btn")
+    .classList.remove("bg-blue-700", "text-white");
+
   if (id === "all" && all.offsetParent === null) {
     all.classList.remove("hidden");
+    document
+      .getElementById("alls-btn")
+      .classList.add("bg-blue-700", "text-white");
   } else if (id === "interview" && interview.offsetParent === null) {
     interview.classList.remove("hidden");
+    document
+      .getElementById("inter-btn")
+      .classList.add("bg-blue-700", "text-white");
   } else if (id === "rejected" && rejected.offsetParent === null) {
     rejected.classList.remove("hidden");
+    document
+      .getElementById("rej-btn")
+      .classList.add("bg-blue-700", "text-white");
   }
 }
 

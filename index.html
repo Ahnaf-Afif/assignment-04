@@ -72,15 +72,17 @@
           <h2>Available Jobs</h2>
           <div class="flex md:flex-row flex-col gap-5">
             <button
+              id="alls-btn"
               onclick="
                 hideShow('all');
                 summary();
               "
-              class="btn btn-outline btn-info"
+              class="btn btn-outline btn-info bg-blue-700 text-white"
             >
               All
             </button>
             <button
+              id="inter-btn"
               onclick="
                 hideShow('interview');
                 totalJobs(
@@ -94,6 +96,7 @@
               Interview
             </button>
             <button
+              id="rej-btn"
               onclick="
                 hideShow('rejected');
                 totalJobs(
